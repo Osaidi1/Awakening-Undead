@@ -42,6 +42,7 @@ extends CharacterBody3D
 @onready var down: ColorRect = $HUD/Down
 @onready var ui: Control = $UI
 @onready var boxes: Node3D = $"../Navigation/Boxes"
+@onready var death: ColorRect = $UI/Death
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -72,6 +73,7 @@ var stamina_regen := 75
 var is_regening := false
 
 func _ready() -> void:
+	death.modulate.a = 0
 	Variables.is_pauseable = false
 	position = Vector3(16, -5, 5)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -294,6 +296,8 @@ func hit(dir) -> void:
 
 func die() -> void:
 	cutscenes.play("die")
+	await get_tree().create_timer(3.5)
+	get_tree().reload_current_scene()
 
 func take_damage(damage) -> void:
 	current_health -= damage
