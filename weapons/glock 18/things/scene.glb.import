@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c5q4cjap5jcvn"
-path="res://.godot/imported/scene.glb-4119b42f8403f7f3d853301bdeceaf7a.scn"
+valid=false
 
 [deps]
 
 source_file="res://weapons/glock 18/things/scene.glb"
-dest_files=["res://.godot/imported/scene.glb-4119b42f8403f7f3d853301bdeceaf7a.scn"]
 
 [params]
 

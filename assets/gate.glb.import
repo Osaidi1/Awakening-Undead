@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cr0dv5g0csvt6"
-path="res://.godot/imported/gate.glb-3acc74f36ac9979cf19a085696ad7f7f.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/gate.glb"
-dest_files=["res://.godot/imported/gate.glb-3acc74f36ac9979cf19a085696ad7f7f.scn"]
 
 [params]
 

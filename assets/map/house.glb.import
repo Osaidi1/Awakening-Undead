@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bmus0t4fwegf3"
-path="res://.godot/imported/house.glb-6bd903485c1e148449e9e0ba58057e36.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/map/house.glb"
-dest_files=["res://.godot/imported/house.glb-6bd903485c1e148449e9e0ba58057e36.scn"]
 
 [params]
 

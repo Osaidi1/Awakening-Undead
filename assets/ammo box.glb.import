@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://djnk3rnewei41"
-path="res://.godot/imported/ammo box.glb-8ef82fcb89c2b11c4823623dcadf7206.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/ammo box.glb"
-dest_files=["res://.godot/imported/ammo box.glb-8ef82fcb89c2b11c4823623dcadf7206.scn"]
 
 [params]
 

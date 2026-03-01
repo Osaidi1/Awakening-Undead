@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://btlxgy0fm6mws"
-path="res://.godot/imported/graveyard pack.glb-b4d6e92d9f0d29dba5644f5267a05913.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/map/graveyard pack.glb"
-dest_files=["res://.godot/imported/graveyard pack.glb-b4d6e92d9f0d29dba5644f5267a05913.scn"]
 
 [params]
 

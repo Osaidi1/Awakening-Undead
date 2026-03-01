@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c2xr1jyijmv13"
-path="res://.godot/imported/coffin.glb-33853368ec3a6cbab0048142fd384480.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/coffin.glb"
-dest_files=["res://.godot/imported/coffin.glb-33853368ec3a6cbab0048142fd384480.scn"]
 
 [params]
 

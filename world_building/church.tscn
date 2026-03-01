@@ -1,4 +1,4 @@
-[gd_scene load_steps=237 format=4 uid="uid://co8dhmgrpswmt"]
+[gd_scene load_steps=236 format=4 uid="uid://co8dhmgrpswmt"]
 
 [ext_resource type="Texture2D" uid="uid://bb4rhs0wwq5vd" path="res://assets/church/textures/Church_Beams_Door_baseColor.png" id="1_iql3d"]
 [ext_resource type="Texture2D" uid="uid://dnqu25wcn6elt" path="res://assets/church/textures/Church_Beams_Door_metallicRoughness.png" id="2_8rono"]
@@ -1261,9 +1261,6 @@ points = PackedVector3Array(4.20685, 4.66772, 0.063731, -4.15208, -4.61998, -0.3
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_35tsu"]
 points = PackedVector3Array(-1.55152, 4.66772, -0.307777, -0.251371, 5.78225, 0.063731, -0.251371, 4.66772, 0.063731, -1.55152, 5.78225, 0.063731, -1.36559, 5.78225, -0.307777, -1.55152, 4.66772, 0.063731, -0.251371, 4.66772, -0.122023, -0.251371, 5.78225, -0.122023, -1.55152, 5.78225, -0.307777, -1.36559, 4.66772, -0.307777)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0bc3p"]
-points = PackedVector3Array(-0.994096, 7.08252, 0.620993, -1.55152, 5.78225, -0.307777, -1.36559, 5.78225, -0.307777, -1.55152, 7.26828, -0.307777, -0.251371, 7.26828, -0.307777, -0.251371, 5.78225, 0.0637855, -1.55152, 5.968, 0.620993, -1.55152, 7.08252, 0.620993, -0.251371, 7.26828, 0.0637855, -0.994096, 5.968, 0.620993, -0.251371, 5.78225, -0.12195, -1.55152, 7.26828, 0.0637855, -1.55152, 5.78225, 0.0637855, -0.251371, 7.08252, -0.307777)
-
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_40427"]
 points = PackedVector3Array(0.86328, 7.26802, -0.307777, -0.251243, 4.66798, -0.122023, -0.251243, 4.66798, 0.063731, 0.86328, 4.66798, -0.122023, -0.251243, 7.26802, 0.063731, 0.86328, 7.26802, 0.063731, -0.251243, 7.26802, -0.307777, 0.86328, 4.66798, 0.063731, -0.251243, 7.08223, -0.307777, 0.86328, 7.08223, -0.307777)
 
@@ -1377,7 +1374,7 @@ shape = SubResource("ConvexPolygonShape3D_ooj10")
 shape = SubResource("ConvexPolygonShape3D_8db58")
 
 [node name="Door_001_Church_Beams_Door_0" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.359467, -1.33415, 0, -1.63737e-07, -4.09222e-08, 1, -1.00501, -0.251179, -1.62921e-07, 0.512532, 1.27232, -2.59973)
+transform = Transform3D(-0.291413, -1.23176, -9.46666e-08, -1.63737e-07, -4.09222e-08, 1, -1.02681, 0.570794, -1.32595e-07, 0.512532, 1.27232, -2.59973)
 mesh = SubResource("ArrayMesh_2vbn4")
 skeleton = NodePath("")
 
@@ -1387,7 +1384,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_ssa5h")
 
 [node name="Door_002_Church_Beams_Door_0" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.449296, 1.30865, -8.65989e-24, 1.60608e-07, -5.11484e-08, 1, 0.985803, -0.313947, -1.62921e-07, -1.02313, 1.29544, -2.61294)
+transform = Transform3D(-0.00972036, 1.31864, 6.88946e-08, 1.60608e-07, -5.11484e-08, 1, 1.08332, 0.268895, -1.47637e-07, -1.02313, 1.29544, -2.61294)
 mesh = SubResource("ArrayMesh_drk3s")
 skeleton = NodePath("")
 
@@ -1956,18 +1953,23 @@ skeleton = NodePath("")
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor_Church_Floor_Roof_0"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0597361)
 shape = SubResource("ConvexPolygonShape3D_sjcws")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0725147)
 shape = SubResource("ConvexPolygonShape3D_35tsu")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_0bc3p")
-
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
+transform = Transform3D(1.74322, 0, 0, 0, 1, 0, 0, 0, 1, -0.608089, 0, -0.0725147)
 shape = SubResource("ConvexPolygonShape3D_40427")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0725147)
+shape = SubResource("ConvexPolygonShape3D_ehjs7")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="Floor_Church_Floor_Roof_0/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4498, 0, -0.0725147)
 shape = SubResource("ConvexPolygonShape3D_ehjs7")
 
 [node name="Roof 4_Church_Floor_Roof_0" type="MeshInstance3D" parent="."]

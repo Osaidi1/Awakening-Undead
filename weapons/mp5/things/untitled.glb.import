@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cw6ttmtw3qk7k"
-path="res://.godot/imported/untitled.glb-98fcd26b5c360f21c3f0d96bc1afce75.scn"
+valid=false
 
 [deps]
 
 source_file="res://weapons/mp5/things/untitled.glb"
-dest_files=["res://.godot/imported/untitled.glb-98fcd26b5c360f21c3f0d96bc1afce75.scn"]
 
 [params]
 

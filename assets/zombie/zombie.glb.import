@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://sjmvicfq82r3"
-path="res://.godot/imported/zombie.glb-6eb5dc50ccf3fd6c5a172b6117c723f9.scn"
+valid=false
 
 [deps]
 
 source_file="res://assets/zombie/zombie.glb"
-dest_files=["res://.godot/imported/zombie.glb-6eb5dc50ccf3fd6c5a172b6117c723f9.scn"]
 
 [params]
 
