@@ -42,10 +42,10 @@ extends CharacterBody3D
 @onready var down: ColorRect = $HUD/Down
 @onready var ui: Control = $UI
 @onready var boxes: Node3D = $"../Navigation/Boxes"
-@onready var death: ColorRect = $UI/Death
 @onready var main_music: AudioStreamPlayer3D = $"../Audios/Main Music"
 @onready var bg: ColorRect = $"../Credits/BG"
 @onready var entry_music: AudioStreamPlayer3D = $"../Audios/Entry Music"
+@onready var death_text: Label = $"HUD/Death Text"
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -68,7 +68,7 @@ var fall_value := 0.0
 var FALL_TILT_TIMER := 0.0
 var forward_tilt_max := 1.25
 var current_fall_velocity: float 
-var current_health := 0
+var current_health := 5
 var is_dead:= false
 var current_stamina := 0
 var stamina_drain := 0.1
@@ -81,7 +81,7 @@ func _ready() -> void:
 		entry_music.play()
 	else:
 		cutscenes.play("restart")
-	death.modulate.a = 0
+	Variables.is_changing = false
 	Variables.is_pauseable = false
 	position = Vector3(16, -5, 5)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -308,9 +308,12 @@ func hit(dir) -> void:
 	Variables.player_hit = false
 
 func die() -> void:
-	
+	Variables.is_changing = true
 	cutscenes.play("die")
-	await get_tree().create_timer(3.5).timeout
+	await get_tree().create_timer(2.4).timeout
+	death_text.text = "GET UP" 
+	await get_tree().create_timer(2.6).timeout
+	current_health = 100
 	get_tree().reload_current_scene()
 
 func take_damage(damage) -> void:
@@ -346,8 +349,13 @@ func wave_manager(zombies, z_health, wait, atp) -> void:
 	for i in range(zombies):
 		await get_tree().create_timer(wait).timeout
 		var point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
-		point.spawn_zombie()
-		if Variables.zombies_alive > atp:
+		if point.can_spawn:
+			point.spawn_zombie()
+		else:
+			while !point.can_spawn:
+				point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
+			point.spawn_zombie()
+		if Variables.zombies_alive > atp -1:
 			await get_tree().process_frame
 	await get_tree().create_timer(5).timeout
 	while Variables.zombies_alive > 0:

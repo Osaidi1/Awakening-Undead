@@ -12,3 +12,9 @@ var can_spawn_double: bool
 var reload: bool
 var cutscene_played := false
 var can_control: bool
+var is_changing: bool
+
+func black_screen() -> void:
+	if is_changing:
+		$Player/HUD/Middle.visible = true
+		$Player/HUD/Middle.modulate.a = 255

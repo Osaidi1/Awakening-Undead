@@ -30,6 +30,7 @@ func _on_continue_pressed() -> void:
 	await get_tree().create_timer(0.1).timeout
 	play_pop_up.visible = false
 	await get_tree().create_timer(2).timeout
+	Variables.is_changing = true
 	black.visible = true
 	get_tree().change_scene_to_file("res://scenes/world.tscn")
 	for i in range(10):

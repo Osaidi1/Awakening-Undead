@@ -65,7 +65,7 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if is_reloading: return
-	if !Variables.can_control: return
+	if !player.can_control: return
 	delay.wait_time = weapon.bullet_delay
 	if delay.is_stopped() :
 		if Engine.is_editor_hint():
