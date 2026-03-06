@@ -146,10 +146,10 @@ texture = ExtResource("4_71k7c")
 
 [node name="Bone" type="TextureRect" parent="Pause Menu/Design"]
 layout_mode = 0
-offset_left = 1412.0
-offset_top = 178.0
-offset_right = 2804.0
-offset_bottom = 2050.0
+offset_left = 1375.0
+offset_top = 167.0
+offset_right = 2940.0
+offset_bottom = 2272.0
 rotation = 0.287882
 scale = Vector2(0.225637, 0.0479383)
 texture = ExtResource("5_cmnsq")

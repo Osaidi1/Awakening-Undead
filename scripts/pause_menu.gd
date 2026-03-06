@@ -39,7 +39,6 @@ func _on_main_menu_pressed() -> void:
 	await get_tree().create_timer(1).timeout
 	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/main menu.tscn")
-	await get_tree().create_timer(0.1).timeout
 	animation_player.play_backwards("black")
 
 func _on_resume_pressed() -> void:

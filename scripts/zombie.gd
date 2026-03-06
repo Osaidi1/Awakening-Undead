@@ -17,8 +17,14 @@ extends damageable
 @onready var world: Node3D = $"./Player"
 @onready var eye_1: OmniLight3D = $Armature/GeneralSkeleton/PhysicalBoneSimulator3D/Head/Eye1
 @onready var eye_2: OmniLight3D = $Armature/GeneralSkeleton/PhysicalBoneSimulator3D/Head/Eye2
+@onready var idle_1: AudioStreamPlayer3D = $"Idle 1"
+@onready var idle_2: AudioStreamPlayer3D = $"Idle 2"
+@onready var hurt_1: AudioStreamPlayer3D = $"Hurt 1"
+@onready var hurt_2: AudioStreamPlayer3D = $"Hurt 2"
+@onready var dying: AudioStreamPlayer3D = $Die
 
 const ZOMBIE_RAGDOLL = preload("res://instantiable/zombie_ragdoll.tscn")
+var rng = RandomNumberGenerator.new()
 
 var state_machine
 var player_is_in_range: bool
@@ -26,6 +32,8 @@ var ragdoll_started := false
 var is_dead := false
 var knockback_velocity := Vector3.ZERO
 var is_alive: bool
+var is_playing_sound := false
+var prev_health
 
 func _ready() -> void:
 	is_alive = true
@@ -95,6 +103,9 @@ func has_died() -> bool:
 	return current_health <= 0
 
 func die() -> void:
+	if !is_playing_sound:
+		play_sound("die")
+		is_playing_sound = true
 	is_alive = false
 	Variables.zombies_alive -= 1
 	anim_flow.active = false
@@ -133,3 +144,41 @@ func being_attacked() -> void:
 	if !player_is_in_range and old_health > current_health:
 		player_is_in_range = true
 	old_health = current_health
+
+func play_sound(sound) -> void:
+	match sound:
+		"idle":
+			var idle_sound := randi_range(1, 2)
+			if idle_sound == 1:
+				idle_1.pitch_scale = randf_range(0.85, 1.15)
+				idle_1.play()
+				
+			else:
+				idle_2.pitch_scale = randf_range(0.85, 1.15)
+				idle_2.play()
+		"hurt":
+			var hurt_sound := randi_range(1, 2)
+			if hurt_sound == 1:
+				hurt_1.pitch_scale = randf_range(0.85, 1.15)
+				hurt_1.play()
+			else:
+				hurt_2.pitch_scale = randf_range(0.85, 1.15)
+				hurt_2.play()
+		"die":
+			dying.play()
+			dying.pitch_scale = randf_range(0.85, 1.15)
+
+func _on_die_finished() -> void:
+	is_playing_sound = false
+
+func _on_hurt_2_finished() -> void:
+	is_playing_sound = false
+
+func _on_hurt_1_finished() -> void:
+	is_playing_sound = false
+
+func _on_idle_2_finished() -> void:
+	is_playing_sound = false
+
+func _on_idle_1_finished() -> void:
+	is_playing_sound = false

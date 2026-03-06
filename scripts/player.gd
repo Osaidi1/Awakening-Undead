@@ -46,6 +46,7 @@ extends CharacterBody3D
 @onready var bg: ColorRect = $"../Credits/BG"
 @onready var entry_music: AudioStreamPlayer3D = $"../Audios/Entry Music"
 @onready var death_text: Label = $"HUD/Death Text"
+@onready var animation_of_main_menu: AnimationPlayer = $Animation
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -76,13 +77,15 @@ var stamina_regen := 75
 var is_regening := false
 
 func _ready() -> void:
+	middle.position = Vector2(0, 0)
+	middle.visible = true
 	if Variables.cutscene_played:
 		cutscenes.play("intro")
 		entry_music.play()
+		Variables.is_pauseable = false
 	else:
 		cutscenes.play("restart")
-	Variables.is_changing = false
-	Variables.is_pauseable = false
+		Variables.is_pauseable = true
 	position = Vector3(16, -5, 5)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crouch_check.add_exception($".")

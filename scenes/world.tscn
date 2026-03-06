@@ -2118,7 +2118,6 @@ transform = Transform3D(-1.8604, 0, -4.641, 0, 5, 0, 4.641, 0, -1.8604, -67.2563
 [node name="Player" parent="." instance=ExtResource("2_4wyf3")]
 unique_name_in_owner = true
 transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 8.108, -5.086, 5.8)
-HEALTH = 1
 RUN_SPEED = 5.5
 SENSITIVITY = 0.005
 can_control = true
@@ -2134,11 +2133,13 @@ value = 1000.0
 
 [node name="Up" parent="Player/HUD" index="6"]
 visible = false
+offset_top = -213.0
+offset_bottom = -3.0
 
 [node name="Down" parent="Player/HUD" index="7"]
 visible = false
-offset_top = 872.0
-offset_bottom = 1082.0
+offset_top = 1080.0
+offset_bottom = 1290.0
 
 [node name="Middle" type="ColorRect" parent="Player/HUD" index="8"]
 visible = false
@@ -2261,8 +2262,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 48.025
 anchor_bottom = 27.0
-offset_top = 1100.0
-offset_bottom = 2805.0
+offset_top = 1066.0
+offset_bottom = 2839.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2296,6 +2297,7 @@ Font: managore.itch.io
 Ground: freepik.com/author/0melapics
 Ambient Sound: Kenny
 Music 1: makotohiramatsu.itch.io
+Zombie Sounds: youtube.com/@soundblockz
 Gun Sound 1: youtube.com/@user-us1-sfx
 Gun Sound 2: 
 Gun Sound 3: 
@@ -2340,7 +2342,6 @@ scale = Vector2(48.0684, 27.8236)
 color = Color(0, 0, 0, 1)
 
 [node name="Pause Menu" parent="." instance=ExtResource("24_ctatt")]
-visible = false
 
 [node name="Roads" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 16.6877, -6.0756, 6.32702)

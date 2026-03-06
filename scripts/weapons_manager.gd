@@ -168,6 +168,9 @@ func damage_target(result: Dictionary) -> void:
 	while target and not (target is damageable):
 		target = target.get_parent()
 	if target is damageable:
+		if !target.is_playing_sound and target.current_health > weapon.single_damage:
+			target.play_sound("hurt")
+			target.is_playing_sound = true
 		if collider.is_in_group("head"):
 			target.take_damage(weapon.single_damage * 2)
 		else:
