@@ -1,6 +1,5 @@
 extends Node
 
-@onready var animation: AnimationPlayer = $Animation
 
 var zombie_health := 0
 var player_pos: Vector3

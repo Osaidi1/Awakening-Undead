@@ -19,7 +19,12 @@ signal weapon_fired
 @onready var player: CharacterBody3D = $"../../../../.."
 @onready var delay: Timer = $Delay
 @onready var weapon_name: Label = $"../../../../../HUD/Weapon Name"
-@onready var glock___five_seven: AudioStreamPlayer3D = $"Glock _ Five Seven"
+@onready var glock_five_seven: AudioStreamPlayer3D = $"Glock Five Seven"
+@onready var tec_9_mac_10: AudioStreamPlayer3D = $"Tec9 Mac10"
+@onready var famas_aug: AudioStreamPlayer3D = $"Famas AUG"
+@onready var ak_47: AudioStreamPlayer3D = $AK47
+@onready var scar_h_m_4a_1: AudioStreamPlayer3D = $"Scar H M4A1"
+@onready var m_4a_1_p_90: AudioStreamPlayer3D = $"M4A1 P90"
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -152,7 +157,17 @@ func shoot() -> void:
 		query.collision_mask = 2
 		query.exclude = [player]
 		if weapon == GLOCK_18 or weapon == FIVE_SEVEN:
-			glock___five_seven.play()
+			glock_five_seven.play()
+		if weapon == TEC_9 or weapon == MAC_10:
+			tec_9_mac_10.play()
+		if weapon == FAMAS or weapon == AUG:
+			famas_aug.play()
+		if weapon == AK_47:
+			ak_47.play()
+		if weapon == SCAR_H or weapon == M_4A_1:
+			scar_h_m_4a_1.play()
+		if weapon == P_90 or weapon == UMP_45:
+			famas_aug.play()
 		var result: Dictionary = space_state.intersect_ray(query)
 		if result:
 			bullet_damage(result.get("position"), result.get("normal"))
@@ -187,25 +202,23 @@ func damage_target(result: Dictionary) -> void:
 
 func remove_bullets() -> void:
 	magazine_count -= 1
-	if magazine_count < 1 and total_ammo_count > 0:
+	if magazine_count <= 0 and total_ammo_count > 0 and !is_reloading:
 		reload()
 
 func reload() -> void:
-	if magazine_count == weapon.magazine_size: return
+	if magazine_count == weapon.magazine_size or total_ammo_count == 0: return
 	is_reloading = true
 	reload_anim()
 	
 	if magazine_count == 0:
 		if total_ammo_count >= weapon.magazine_size:
 			await get_tree().create_timer(weapon.reload_time).timeout
-			magazine_count += weapon.magazine_size
+			magazine_count = weapon.magazine_size
 			total_ammo_count -= weapon.magazine_size
 		elif total_ammo_count < weapon.magazine_size:
 			await get_tree().create_timer(weapon.reload_time).timeout
 			magazine_count += total_ammo_count
 			total_ammo_count = 0
-		elif total_ammo_count == 0:
-			pass
 	else:
 		var bullets_needed = weapon.magazine_size - magazine_count
 		if total_ammo_count >= bullets_needed:
@@ -216,8 +229,6 @@ func reload() -> void:
 			await get_tree().create_timer(weapon.reload_time).timeout
 			magazine_count += total_ammo_count
 			total_ammo_count = 0
-		elif total_ammo_count == 0:
-			pass
 	is_reloading = false
 
 func reload_anim() -> void:

@@ -34,6 +34,7 @@ var knockback_velocity := Vector3.ZERO
 var is_alive: bool
 var is_playing_sound := false
 var prev_health
+var sound_timer: float
 
 func _ready() -> void:
 	is_alive = true
@@ -44,6 +45,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if current_health <= 0:
 		is_dead = true
+	
+	sound_timer = randf_range(5.0, 10.0)
+	sound_timer -= delta
+	
+	if sound_timer == 0 and !is_playing_sound:
+		play_sound("idle")
 	
 	if is_dead:
 		if !ragdoll_started:

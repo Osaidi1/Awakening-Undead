@@ -46,7 +46,6 @@ extends CharacterBody3D
 @onready var bg: ColorRect = $"../Credits/BG"
 @onready var entry_music: AudioStreamPlayer3D = $"../Audios/Entry Music"
 @onready var death_text: Label = $"HUD/Death Text"
-@onready var animation_of_main_menu: AnimationPlayer = $Animation
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -105,6 +104,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	# Jump
 	if event.is_action_pressed("jump") and !is_crouching:
 		jump()
+	
+	
 	
 	# Crouch
 	if event.is_action_pressed("crouch"):
