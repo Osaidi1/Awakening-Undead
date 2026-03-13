@@ -2158,11 +2158,8 @@ can_control = true
 [node name="Weapons" parent="Player/Head/Recoil/Camera/RecoilPosition" index="0"]
 transform = Transform3D(-0.0983097, -0.063564, 0.993124, 0.155952, 0.984643, 0.0784591, -0.98286, 0.162593, -0.0868871, 0.085, -0.09, -0.175)
 
-[node name="StairUp" parent="Player" index="5"]
-target_position = Vector3(0, 0, 0)
-
-[node name="StairDown" parent="Player" index="6"]
-target_position = Vector3(0, 0, 0)
+[node name="CollisionShape3D" parent="Player/Head/Recoil/Camera/Stair Trigger" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0458984, -0.503205, 0.214233)
 
 [node name="Stamina" parent="Player/HUD/Stamina" index="2"]
 value = 1000.0

@@ -48,6 +48,7 @@ extends CharacterBody3D
 @onready var death_text: Label = $"HUD/Death Text"
 @onready var death_wait: Timer = $"Death wait"
 @onready var death_shader: ColorRect = $"HUD/Death Shader"
+@onready var stair_trigger: Node3D = $"Head/Recoil/Camera/Stair Trigger"
 
 const AK_47 = preload("res://weapon_resource/ak47.tres")
 const AUG = preload("res://weapon_resource/aug.tres")
@@ -165,6 +166,9 @@ func _physics_process(delta: float) -> void:
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, -input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
+			if stair_trigger.jump == true:
+				velocity.y += 3
+				stair_trigger.jump = false
 			weapons.weapon_bob(delta, speed, WEAPON_BOB_H * (speed / 1.5), WEAPON_BOB_V)
 			weapons.weapon_sway(delta, false)
 			velocity.x = direction.x * speed
