@@ -152,13 +152,11 @@ func _physics_process(delta: float) -> void:
 	# Tutorial
 	if Variables.tut_needed:
 		Variables.tut_needed = false
-		await get_tree().create_timer(0.5).timeout
-		movement_tutorial.visible = true
+		show_jump_tut()
 	
 	if Variables.jump_tut:
 		Variables.jump_tut = false
-		await get_tree().create_timer(1).timeout
-		jumping_tutorial.visible = true
+		show_jump_tut()
 	
 	if Variables.tut_completed:
 		Variables.tut_completed = false
@@ -500,3 +498,7 @@ func _on_cutscenes_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "restart":
 		Variables.tut_needed = false
 		gameplay()
+
+func show_jump_tut() -> void:
+	await get_tree().create_timer(1.5).timeout
+	movement_tutorial.visible = true
