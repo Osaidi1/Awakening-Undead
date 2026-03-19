@@ -13,7 +13,7 @@ signal weapon_fired
 		return weapon
 @export var sway_speed := 1.2
 
-@onready var player: CharacterBody3D = $"../../../../.."
+@onready var player: CharacterBody3D = %Player
 @onready var delay: Timer = $Delay
 @onready var weapon_name: Label = $"../../../../../HUD/Weapon Name"
 @onready var glock_five_seven: AudioStreamPlayer3D = $"Glock Five Seven"
@@ -24,7 +24,7 @@ signal weapon_fired
 @onready var ump_45_p_90: AudioStreamPlayer3D = $"UMP 45 P90"
 @onready var mp_5: AudioStreamPlayer3D = $"MP 5"
 @onready var crosshair_container: CenterContainer = $Player/UI/CrosshairContainer
-@onready var shooting_tutorial: Label = $"Player/UI/Shooting Tutorial"
+@onready var camera: Camera3D = $"../.."
 
 const AK_47 := preload("res://weapon_resource/ak47.tres")
 const AUG := preload("res://weapon_resource/aug.tres")
@@ -50,6 +50,7 @@ var is_reloading := false
 var idle_sway_adjustment: float
 var idle_sway_rotation_strength: float
 var weapon_bob_amount: Vector2 = Vector2.ZERO
+var can_shoot := true
 
 const BULLET_HOLE := preload("res://instantiable/bullet_decal.tscn")
 const BLOOD_SPLATER := preload("res://instantiable/blood_splater.tscn")
@@ -62,7 +63,7 @@ func _ready() -> void:
 	total_ammo_count = weapon.start_ammo - magazine_count
 
 func _input(event: InputEvent) -> void:
-	if !player.can_control: return
+	if !Variables.can_control: return
 	if event.is_action_pressed("reload"):
 		reload()
 	if event is InputEventMouseMotion:
@@ -70,9 +71,8 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(_delta: float) -> void:
 	if is_reloading: return
-	if !player.can_control: return
 	delay.wait_time = weapon.bullet_delay
-	if delay.is_stopped() :
+	if delay.is_stopped() and can_shoot:
 		if Engine.is_editor_hint():
 			if Input.has_signal("attack"):
 				if Input.is_action_pressed("attack"):
@@ -80,12 +80,6 @@ func _physics_process(_delta: float) -> void:
 		else:
 			if Input.is_action_pressed("attack"):
 				shoot()
-	
-	# Tutorials
-	if Variables.shoot_tut:
-		Variables.shoot_tut = false
-		await get_tree().create_timer(1.5).timeout
-		shooting_tutorial.visible = true
 
 func load_weapon() -> void:
 	self.mesh = weapon.mesh_scene
@@ -101,7 +95,7 @@ func get_sway_noise() -> float:
 		return 0.0
 	var player_pos := Vector3(0, 0, 0)
 	if not Engine.is_editor_hint():
-		player_pos = player.global_position
+		player_pos = Variables.player_pos
 	return noise.get_noise_2d(player_pos.x, player_pos.y)
 
 func weapon_sway(delta, is_idle: bool) -> void:
@@ -149,12 +143,9 @@ func bullet_damage(pos: Vector3, normal: Vector3) -> void:
 
 func shoot() -> void:
 	if is_reloading: return
-	if shooting_tutorial.visible == true:
-		shooting_tutorial.visible = false
-		Variables.tut_completed = true
+	can_shoot = false
 	if magazine_count > 0:
 		weapon_fired.emit()
-		var camera = $"../.."
 		var space_state: PhysicsDirectSpaceState3D = camera.get_world_3d().direct_space_state
 		var origin: Vector3 = camera.global_position
 		var ray_direction: Vector3 = -camera.global_basis.z
@@ -185,13 +176,14 @@ func shoot() -> void:
 			damage_target(result)
 		remove_bullets()
 		delay.start()
+		await delay.timeout
+		can_shoot = true
 
 func damage_target(result: Dictionary) -> void:
 	var target = result["collider"]
 	var collider = target
 	while target and not (target is damageable):
 		target = target.get_parent()
-	print("here3")
 	if target is damageable:
 		if !target.is_playing_sound and target.current_health > weapon.single_damage:
 			target.play_sound("hurt")
@@ -200,14 +192,12 @@ func damage_target(result: Dictionary) -> void:
 			target.take_damage(weapon.single_damage * 2)
 		else:
 			target.take_damage(weapon.single_damage)
-		print("here4")
 		var area = collider.get_parent()
 		var bone = area.get_parent()
 		var skeleton = bone.get_parent()
 		var armature = skeleton.get_parent()
 		var zombie = armature.get_parent()
 		if zombie.is_alive:
-			print("here5")
 			var blood_effect := BLOOD_SPLATER.instantiate()
 			get_tree().root.add_child(blood_effect)
 			blood_effect.global_position = result.position

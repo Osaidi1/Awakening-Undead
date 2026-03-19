@@ -1012,7 +1012,7 @@ offset_bottom = 417.0
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_xccyo")
 theme_override_font_sizes/font_size = 50
-text = "Ctrl to Crouch (Dodge)"
+text = "Ctrl to Crouch"
 
 [node name="Warning" type="Label" parent="Play Pop up"]
 layout_mode = 0

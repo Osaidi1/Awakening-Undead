@@ -120,7 +120,6 @@ func die() -> void:
 	armature.visible = false
 	eye_1.visible = false
 	eye_2.visible = false
-	print("here1")
 	var ragdoll = ZOMBIE_RAGDOLL.instantiate()
 	ragdoll.global_transform = global_transform
 	ragdoll.rotation = global_rotation
@@ -133,7 +132,6 @@ func die() -> void:
 	ragdoll_anim.play("dissolve")
 	var tween = create_tween()
 	tween.tween_callback(Callable(ragdoll, "queue_free")).set_delay(3.5)
-	print("here2")
 
 func _on_player_body_entered(body: Node3D) -> void:
 	if is_dead: return

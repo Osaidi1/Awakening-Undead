@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("1_ngwdj")
 weapon_name = "AK47"
-tier_number = 9
+tier_number = 8
 bullet_delay = 0.1
 single_damage = 2.7
 shoot_range = 65
 magazine_size = 15
-start_ammo = 200
-max_ammo = 400
+start_ammo = 500
+max_ammo = 600
 reload_time = 2.0
 position = Vector3(0.11, -0.115, -0.149)
 rotation = Vector3(-2.7, 90, 6)

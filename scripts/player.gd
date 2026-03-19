@@ -50,6 +50,7 @@ extends CharacterBody3D
 @onready var stair_trigger: Node3D = $"Head/Recoil/Camera/Stair Trigger"
 @onready var movement_tutorial: Label = $"UI/Movement Tutorial"
 @onready var jumping_tutorial: Label = $"UI/Jupming Tutorial"
+@onready var shooting_tutorial: Label = $"UI/Shooting Tutorial"
 
 const AK_47 := preload("res://weapon_resource/ak47.tres")
 const AUG := preload("res://weapon_resource/aug.tres")
@@ -78,8 +79,23 @@ var stamina_drain := 0.1
 var stamina_regen := 75
 var is_regening := false
 var can_sprint := true
+var gameplay_running := false
 
 var shader_material := ShaderMaterial.new()
+
+var waves = [
+	{"zombies":8, "health":15, "wait":2.8, "atp":8, "weapon":GLOCK_18},
+	{"zombies":16, "health":17, "wait":2.6, "atp":10, "weapon":TEC_9},
+	{"zombies":24, "health":19, "wait":2.4, "atp":12, "weapon":MAC_10},
+	{"zombies":32, "health":21, "wait":2.2, "atp":12, "weapon":UMP_45},
+	{"zombies":35, "health":23, "wait":2.0, "atp":15, "weapon":MP_5},
+	{"zombies":40, "health":25, "wait":1.8, "atp":15, "weapon":P_90},
+	{"zombies":50, "health":27, "wait":1.6, "atp":15, "weapon":FAMAS},
+	{"zombies":55, "health":29, "wait":1.4, "atp":16, "weapon":AK_47},
+	{"zombies":60, "health":31, "wait":1.2, "atp":16, "weapon":AUG},
+	{"zombies":65, "health":33, "wait":1.0, "atp":17, "weapon":SCAR_H},
+	{"zombies":70, "health":35, "wait":0.75, "atp":18, "weapon":M_4A_1}
+]
 
 func _ready() -> void:
 	death_wait.start()
@@ -133,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		die()
 		return
 	
-	#if Input.is_action_pressed("temp"):
+	#if Input.is_action_just_pressed("temp"):
 	#	cutscenes.stop()
 	#	position = Vector3(8.108, -5.086, 5.8)
 	#	rotation = Vector3(0, 90, 0)
@@ -145,22 +161,7 @@ func _physics_process(delta: float) -> void:
 	#	ui.visible = true
 	#	head.rotation = Vector3(0, 0 ,0)
 	#	camera.rotation = Vector3(0, 0 ,0)
-	#	gameplay()
-	
-	$"../Label".text = str(Engine.get_frames_per_second())
-	
-	# Tutorial
-	if Variables.tut_needed:
-		Variables.tut_needed = false
-		show_jump_tut()
-	
-	if Variables.jump_tut:
-		Variables.jump_tut = false
-		show_jump_tut()
-	
-	if Variables.tut_completed:
-		Variables.tut_completed = false
-		gameplay()
+	#	start_gameplay()
 	
 	if can_control:
 		Variables.can_control = true
@@ -181,9 +182,6 @@ func _physics_process(delta: float) -> void:
 	var direction := (head.transform.basis * Vector3(input_dir.x, 0, -input_dir.y)).normalized()
 	if is_on_floor():
 		if direction:
-			if movement_tutorial.visible == true:
-				movement_tutorial.visible = false
-				Variables.jump_tut = true
 			if stair_trigger.jump == true:
 				velocity.y += 3
 				stair_trigger.jump = false
@@ -278,9 +276,6 @@ func head_bob(delta) -> void:
 func jump() -> void:
 	if is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	if jumping_tutorial.visible == true:
-		jumping_tutorial.visible = false
-		Variables.shoot_tut = true
 
 func interact() -> void:
 	if interact_cast_result and interact_cast_result.has_user_signal("interacting"):
@@ -351,6 +346,7 @@ func hit(dir) -> void:
 
 func die() -> void:
 	death_wait.stop()
+	gameplay_running = false
 	if is_dead or Variables.once_death or !death_wait.is_stopped():
 		return
 	Variables.once_death = true
@@ -395,23 +391,23 @@ func remove_velo_aftet_cut() -> void:
 
 func wave_manager(zombies, z_health, wait, atp) -> void:
 	if not is_instance_valid(self): return
-	Variables.zombies_alive = zombies
 	Variables.zombie_health = z_health
 	for i in range(zombies):
+		if is_dead:
+			return
 		await get_tree().create_timer(wait).timeout
 		var point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
+		var tries := 0
+		var max_tries := 10
+		while !point.can_spawn and tries < max_tries:
+			tries += 1
+			point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
 		if point.can_spawn:
 			point.spawn_zombie()
-		else:
-			while !point.can_spawn:
-				point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
-			point.spawn_zombie()
-		if Variables.zombies_alive > atp - 1:
-			await get_tree().process_frame
-	await get_tree().create_timer(5).timeout
-	while Variables.zombies_alive > 1 and !is_dead:
-		if not is_instance_valid(self): return
-		await get_tree().process_frame
+			Variables.zombies_alive += 1
+	while Variables.zombies_alive > 0 and !is_dead:
+		await get_tree().create_timer(0.2).timeout
+	print("ended")
 
 func ending() -> void:
 	if not is_instance_valid(self): return
@@ -421,51 +417,13 @@ func ending() -> void:
 	get_tree().change_scene_to_file("res://scenes/main menu.tscn")
 
 func gameplay() -> void:
-	await get_tree().create_timer(1).timeout
-	if not is_instance_valid(self): return
-	await get_tree().create_timer(5).timeout
-	await wave_manager(8, 15, 2.8, 3)
-	weapons.weapon = TEC_9
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(16, 17, 2.6, 6)
-	weapons.weapon = MAC_10
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(24, 19, 2.4, 8)
-	weapons.weapon = UMP_45
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(32, 21, 2.2, 10)
-	weapons.weapon = MP_5
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(35, 23, 2.0, 12)
-	weapons.weapon = P_90
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(40, 25, 1.8, 12)
-	weapons.weapon = FAMAS
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(50, 27, 1.6, 15)
-	weapons.weapon = AK_47
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(55, 29, 1.4, 15)
-	weapons.weapon = AUG
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(60, 31, 1.2, 16)
-	weapons.weapon = SCAR_H
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(65, 33, 1.0, 17)
-	weapons.weapon = M_4A_1
-	weapons.load_weapon()
-	await get_tree().create_timer(10).timeout
-	await wave_manager(70, 35, 0.75, 18)
-	await get_tree().create_timer(2).timeout
+	reset_gameplay_vars()
+	for wave in waves:
+		if is_dead: return
+		weapons.weapon = wave.weapon
+		weapons.load_weapon()
+		await wave_manager(wave.zombies, wave.health, wave.wait, wave.atp)
+		await get_tree().create_timer(10).timeout
 	can_control = false
 	ending() 
 
@@ -492,13 +450,15 @@ func get_ammo() -> void:
 		weapons.total_ammo_count += 50
 		Variables.give_ammo = false
 
-func _on_cutscenes_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "intro":
-		Variables.tut_needed = true
-	if anim_name == "restart":
-		Variables.tut_needed = false
-		gameplay()
+func reset_gameplay_vars():
+	Variables.zombies_alive = 0
+	Variables.player_hit = false
+	Variables.give_ammo = false
+	Variables.once_death = false
+	is_dead = false
 
-func show_jump_tut() -> void:
-	await get_tree().create_timer(1.5).timeout
-	movement_tutorial.visible = true
+func start_gameplay():
+	if gameplay_running: return
+	gameplay_running = true
+	await gameplay()
+	gameplay_running = false

@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("1_pf1q3")
 weapon_name = "mp5"
-tier_number = 6
-bullet_delay = 0.09
+tier_number = 5
+bullet_delay = 0.13
 single_damage = 1.62
 shoot_range = 45
 magazine_size = 12
-start_ammo = 220
-max_ammo = 350
+start_ammo = 550
+max_ammo = 650
 reload_time = 2.0
 position = Vector3(-1.2, -0.2, 0)
 rotation = Vector3(-80.515, 30.24, 21)

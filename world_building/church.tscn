@@ -1,4 +1,4 @@
-[gd_scene load_steps=236 format=4 uid="uid://co8dhmgrpswmt"]
+[gd_scene load_steps=237 format=4 uid="uid://co8dhmgrpswmt"]
 
 [ext_resource type="Texture2D" uid="uid://bb4rhs0wwq5vd" path="res://assets/church/textures/Church_Beams_Door_baseColor.png" id="1_iql3d"]
 [ext_resource type="Texture2D" uid="uid://dnqu25wcn6elt" path="res://assets/church/textures/Church_Beams_Door_metallicRoughness.png" id="2_8rono"]
@@ -1352,6 +1352,9 @@ points = PackedVector3Array(0.617579, 0.773233, -1.47658, 0.904364, 0.887936, 0.
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j1ug7"]
 points = PackedVector3Array(-0.357448, 0.773233, 1.84988, 0.904364, 0.887936, 1.16202, 0.445417, 0.887936, 1.73529, -0.586921, 0.887936, 0.64581, 0.904364, 0.773233, 0.588436, -0.586921, 0.773233, 0.64581, 0.215944, 0.773233, 2.022, -0.0706061, 0.887936, 2.19412, 0.904364, 0.887936, 0.588436, -0.586921, 0.887936, 1.56316, 0.904364, 0.773233, 1.16202, -0.586921, 0.773233, 1.56316, -0.0706061, 0.773233, 2.19412, 0.0441307, 0.887936, 2.19412, 0.617522, 0.887936, 0.588436, 0.0441307, 0.773233, 2.19412, 0.617522, 0.773233, 0.588436)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iql3d"]
+size = Vector3(2.51123, 0.174072, 0.70435)
+
 [node name="Sketchfab_Scene" type="Node3D"]
 
 [node name="DoorFrame_Church_Beams_Door_0" type="MeshInstance3D" parent="."]
@@ -1394,7 +1397,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_q2pit")
 
 [node name="Handle_001_Church_Extras_0" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.313947, 1.30865, -1.82008e-22, 1.12225e-07, -5.11484e-08, 1, 0.688832, -0.313947, -1.62921e-07, -0.730065, 1.0574, -2.04138)
+transform = Transform3D(-0.0349082, 1.30775, 7.43317e-08, 1.12225e-07, -5.11484e-08, 1, 0.756197, 0.317696, -1.44976e-07, -0.990555, 1.0574, -2.04138)
 mesh = SubResource("ArrayMesh_7dtlb")
 skeleton = NodePath("")
 
@@ -2008,3 +2011,7 @@ shape = SubResource("ConvexPolygonShape3D_wlsq7")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="Panels 2_Church_Panels_Front_0/StaticBody3D"]
 shape = SubResource("ConvexPolygonShape3D_j1ug7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.892971, 0.450114, 0, -0.450114, 0.892971, -0.186523, -0.0837649, -4.08846)
+shape = SubResource("BoxShape3D_iql3d")

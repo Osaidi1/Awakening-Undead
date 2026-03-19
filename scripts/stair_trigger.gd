@@ -7,4 +7,5 @@ var jump := false
 
 func _process(delta: float) -> void:
 	if !up.is_colliding() and down.is_colliding():
-		jump = true
+		#jump = true
+		pass

@@ -6,13 +6,13 @@
 [resource]
 script = ExtResource("1_3og5e")
 weapon_name = "UMP 45"
-tier_number = 5
-bullet_delay = 0.12
+tier_number = 4
+bullet_delay = 0.1
 single_damage = 2.04
 shoot_range = 45
 magazine_size = 15
-start_ammo = 200
-max_ammo = 350
+start_ammo = 400
+max_ammo = 500
 reload_time = 2.0
 position = Vector3(0.095, -0.165, -0.195)
 rotation = Vector3(-78, -90, 90)
