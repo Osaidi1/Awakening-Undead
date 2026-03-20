@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://chl3sm4yu6k5y"
 path.s3tc="res://.godot/imported/road_VoxelNuke-17-RoadTile-0.png-034a3d50547d447a3fa353f708ff1b0d.s3tc.ctex"
+path.etc2="res://.godot/imported/road_VoxelNuke-17-RoadTile-0.png-034a3d50547d447a3fa353f708ff1b0d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/map/road_VoxelNuke-17-RoadTile-0.png"
-dest_files=["res://.godot/imported/road_VoxelNuke-17-RoadTile-0.png-034a3d50547d447a3fa353f708ff1b0d.s3tc.ctex"]
+dest_files=["res://.godot/imported/road_VoxelNuke-17-RoadTile-0.png-034a3d50547d447a3fa353f708ff1b0d.s3tc.ctex", "res://.godot/imported/road_VoxelNuke-17-RoadTile-0.png-034a3d50547d447a3fa353f708ff1b0d.etc2.ctex"]
 
 [params]
 

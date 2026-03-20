@@ -2106,6 +2106,7 @@ transform = Transform3D(-1.8604, 0, -4.641, 0, 5, 0, 4.641, 0, -1.8604, -67.2563
 [node name="Player" parent="." instance=ExtResource("2_4wyf3")]
 unique_name_in_owner = true
 transform = Transform3D(-3.61999e-06, 0, 1, 0, 1, 0, -1, 0, -3.61999e-06, 8.108, -5.086, 5.8)
+HEALTH = 500
 RUN_SPEED = 5.5
 SENSITIVITY = 0.005
 can_control = true
@@ -2121,6 +2122,9 @@ transform = Transform3D(-0.708474, 0.705709, -0.00626576, 0.705723, 0.708488, 0,
 [node name="Up" parent="Player/Head/Recoil/Camera/Stair Trigger" index="1"]
 transform = Transform3D(-0.708474, 0.705709, -0.00626576, 0.705723, 0.708488, 0, 0.00443922, -0.00442189, -0.99998, 0, -0.289835, 0.857376)
 target_position = Vector3(0, 0, 0.865)
+
+[node name="Stamina Regen Wait" parent="Player/HUD/Stamina" index="1"]
+wait_time = 2.0
 
 [node name="Stamina" parent="Player/HUD/Stamina" index="2"]
 value = 1000.0

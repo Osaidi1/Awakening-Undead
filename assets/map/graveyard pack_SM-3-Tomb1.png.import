@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dkaswc8eeaygq"
 path.s3tc="res://.godot/imported/graveyard pack_SM-3-Tomb1.png-f7686452e83080de99ee4479d5da3c76.s3tc.ctex"
+path.etc2="res://.godot/imported/graveyard pack_SM-3-Tomb1.png-f7686452e83080de99ee4479d5da3c76.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/map/graveyard pack_SM-3-Tomb1.png"
-dest_files=["res://.godot/imported/graveyard pack_SM-3-Tomb1.png-f7686452e83080de99ee4479d5da3c76.s3tc.ctex"]
+dest_files=["res://.godot/imported/graveyard pack_SM-3-Tomb1.png-f7686452e83080de99ee4479d5da3c76.s3tc.ctex", "res://.godot/imported/graveyard pack_SM-3-Tomb1.png-f7686452e83080de99ee4479d5da3c76.etc2.ctex"]
 
 [params]
 

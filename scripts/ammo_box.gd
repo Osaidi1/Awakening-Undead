@@ -22,4 +22,3 @@ func interact() -> void:
 		Variables.give_ammo = true
 		get_parent().visible = false
 		collision.disabled = true
-		Variables.reload = true

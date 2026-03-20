@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqr2h1uwaq6im"
 path.s3tc="res://.godot/imported/untitled_Material.png-d7883f872c899ba47cdb84fc1b4f1c21.s3tc.ctex"
+path.etc2="res://.godot/imported/untitled_Material.png-d7883f872c899ba47cdb84fc1b4f1c21.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://weapons/famas/things/untitled_Material.png"
-dest_files=["res://.godot/imported/untitled_Material.png-d7883f872c899ba47cdb84fc1b4f1c21.s3tc.ctex"]
+dest_files=["res://.godot/imported/untitled_Material.png-d7883f872c899ba47cdb84fc1b4f1c21.s3tc.ctex", "res://.godot/imported/untitled_Material.png-d7883f872c899ba47cdb84fc1b4f1c21.etc2.ctex"]
 
 [params]
 

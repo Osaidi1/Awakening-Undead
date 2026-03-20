@@ -80,22 +80,22 @@ var stamina_regen := 75
 var is_regening := false
 var can_sprint := true
 var gameplay_running := false
+var given_ammo := false
 
 var shader_material := ShaderMaterial.new()
 
 var waves = [
-	{"zombies":8, "health":15, "wait":2.8, "atp":8, "weapon":GLOCK_18},
-	{"zombies":16, "health":17, "wait":2.6, "atp":10, "weapon":TEC_9},
-	{"zombies":24, "health":19, "wait":2.4, "atp":12, "weapon":MAC_10},
-	{"zombies":32, "health":21, "wait":2.2, "atp":12, "weapon":UMP_45},
-	{"zombies":35, "health":23, "wait":2.0, "atp":15, "weapon":MP_5},
-	{"zombies":40, "health":25, "wait":1.8, "atp":15, "weapon":P_90},
-	{"zombies":50, "health":27, "wait":1.6, "atp":15, "weapon":FAMAS},
-	{"zombies":55, "health":29, "wait":1.4, "atp":16, "weapon":AK_47},
-	{"zombies":60, "health":31, "wait":1.2, "atp":16, "weapon":AUG},
-	{"zombies":65, "health":33, "wait":1.0, "atp":17, "weapon":SCAR_H},
-	{"zombies":70, "health":35, "wait":0.75, "atp":18, "weapon":M_4A_1}
-]
+	{"zombies":8, "health":15, "wait":2.8, "atp":6, "weapon":GLOCK_18},
+	{"zombies":14, "health":17, "wait":2.6, "atp":8, "weapon":TEC_9},
+	{"zombies":20, "health":19, "wait":2.4, "atp":10, "weapon":MAC_10},
+	{"zombies":24, "health":21, "wait":2.2, "atp":12, "weapon":UMP_45},
+	{"zombies":30, "health":23, "wait":2.0, "atp":14, "weapon":MP_5},
+	{"zombies":36, "health":25, "wait":1.8, "atp":14, "weapon":P_90},
+	{"zombies":42, "health":27, "wait":1.6, "atp":14, "weapon":FAMAS},
+	{"zombies":48, "health":29, "wait":1.4, "atp":14, "weapon":AK_47},
+	{"zombies":55, "health":31, "wait":1.2, "atp":16, "weapon":AUG},
+	{"zombies":60, "health":33, "wait":1.0, "atp":17, "weapon":SCAR_H},
+	{"zombies":60, "health":35, "wait":0.75, "atp":18, "weapon":M_4A_1}]
 
 func _ready() -> void:
 	death_wait.start()
@@ -110,6 +110,7 @@ func _ready() -> void:
 		cutscenes.play("intro")
 		entry_music.play()
 		Variables.is_pauseable = false
+		can_control = false
 	else:
 		cutscenes.play("restart")
 		Variables.is_pauseable = true
@@ -117,6 +118,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	crouch_check.add_exception($".")
 	current_stamina = STAMINA
+	stamina.max_value = STAMINA
 	health.max_value = HEALTH
 	stamina.max_value = STAMINA
 
@@ -149,6 +151,10 @@ func _physics_process(delta: float) -> void:
 		die()
 		return
 	
+	if Variables.spawn_boxes:
+		ammo_boxes(true)
+		Variables.spawn_boxes = false
+	
 	#if Input.is_action_just_pressed("temp"):
 	#	cutscenes.stop()
 	#	position = Vector3(8.108, -5.086, 5.8)
@@ -166,10 +172,7 @@ func _physics_process(delta: float) -> void:
 	if can_control:
 		Variables.can_control = true
 	else:
-		Variables.can_control = false	
-	
-	if Variables.reload:
-		weapons.reload()
+		Variables.can_control = false
 	
 	Variables.player_pos = global_position
 	
@@ -218,8 +221,6 @@ func _physics_process(delta: float) -> void:
 	air_procces()
 	
 	interact_cast()
-	
-	out_of_ammo()
 	
 	move_and_slide()
 
@@ -379,6 +380,7 @@ func intro_method() -> void:
 	await get_tree().create_timer(10).timeout
 	Variables.is_pauseable = true
 	main_music.playing = true
+	can_control = true
 
 func outro_method() -> void:
 	camera.rotation = Vector3(0, 0, 0)
@@ -390,6 +392,8 @@ func remove_velo_aftet_cut() -> void:
 	velocity.y = 0
 
 func wave_manager(zombies, z_health, wait, atp) -> void:
+	Variables.zombies_now = atp
+	print(Variables.zombies_alive)
 	if not is_instance_valid(self): return
 	Variables.zombie_health = z_health
 	for i in range(zombies):
@@ -398,13 +402,20 @@ func wave_manager(zombies, z_health, wait, atp) -> void:
 		await get_tree().create_timer(wait).timeout
 		var point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
 		var tries := 0
-		var max_tries := 10
+		var max_tries := 12
 		while !point.can_spawn and tries < max_tries:
 			tries += 1
 			point = spawn_points.get_child(randi_range(0, spawn_points.get_child_count() - 1))
 		if point.can_spawn:
 			point.spawn_zombie()
 			Variables.zombies_alive += 1
+			print("added: ", Variables.zombies_alive)
+		else:
+			point.spawn_second_zombie()
+			Variables.zombies_alive += 1
+			print("added: ", Variables.zombies_alive)
+		while Variables.zombies_alive >= atp and !is_dead:
+			await get_tree().create_timer(0.2).timeout
 	while Variables.zombies_alive > 0 and !is_dead:
 		await get_tree().create_timer(0.2).timeout
 	print("ended")
@@ -439,16 +450,12 @@ func ammo_boxes(yesorno: bool) -> void:
 			box.visible = true
 			box.get_child(2).disabled = false
 
-func out_of_ammo() -> void:
-	if weapons.total_ammo_count < 11:
-		ammo_boxes(true)
-	else:
-		ammo_boxes(false)
-
 func get_ammo() -> void:
 	if Variables.give_ammo:
 		weapons.total_ammo_count += 50
 		Variables.give_ammo = false
+		if weapons.total_ammo_count > 50:
+			ammo_boxes(false)
 
 func reset_gameplay_vars():
 	Variables.zombies_alive = 0

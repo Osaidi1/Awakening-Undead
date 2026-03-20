@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://by2c58gn2sdss"
 path.s3tc="res://.godot/imported/untitled_mac10mat_normal.png-1b6d7cc9cf04c4db3cdf9cd5bedcd95c.s3tc.ctex"
+path.etc2="res://.godot/imported/untitled_mac10mat_normal.png-1b6d7cc9cf04c4db3cdf9cd5bedcd95c.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://weapons/mac10/things/untitled_mac10mat_normal.png"
-dest_files=["res://.godot/imported/untitled_mac10mat_normal.png-1b6d7cc9cf04c4db3cdf9cd5bedcd95c.s3tc.ctex"]
+dest_files=["res://.godot/imported/untitled_mac10mat_normal.png-1b6d7cc9cf04c4db3cdf9cd5bedcd95c.s3tc.ctex", "res://.godot/imported/untitled_mac10mat_normal.png-1b6d7cc9cf04c4db3cdf9cd5bedcd95c.etc2.ctex"]
 
 [params]
 

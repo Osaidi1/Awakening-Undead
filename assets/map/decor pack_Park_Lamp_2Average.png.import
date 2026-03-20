@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://btpk156t8fovr"
 path.s3tc="res://.godot/imported/decor pack_Park_Lamp_2Average.png-f85bd3b9ab8566331d0c636033ed7ac0.s3tc.ctex"
+path.etc2="res://.godot/imported/decor pack_Park_Lamp_2Average.png-f85bd3b9ab8566331d0c636033ed7ac0.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/map/decor pack_Park_Lamp_2Average.png"
-dest_files=["res://.godot/imported/decor pack_Park_Lamp_2Average.png-f85bd3b9ab8566331d0c636033ed7ac0.s3tc.ctex"]
+dest_files=["res://.godot/imported/decor pack_Park_Lamp_2Average.png-f85bd3b9ab8566331d0c636033ed7ac0.s3tc.ctex", "res://.godot/imported/decor pack_Park_Lamp_2Average.png-f85bd3b9ab8566331d0c636033ed7ac0.etc2.ctex"]
 
 [params]
 

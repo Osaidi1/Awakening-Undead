@@ -113,6 +113,7 @@ func die() -> void:
 		is_playing_sound = true
 	is_alive = false
 	Variables.zombies_alive -= 1
+	print("removed: ", Variables.zombies_alive)
 	anim_flow.active = false
 	animations.stop()
 	velocity = Vector3.ZERO

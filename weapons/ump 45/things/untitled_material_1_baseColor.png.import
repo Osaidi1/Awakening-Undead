@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvxs4v6g0fkiy"
 path.s3tc="res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.s3tc.ctex"
+path.etc2="res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://weapons/ump 45/things/untitled_material_1_baseColor.png"
-dest_files=["res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.s3tc.ctex"]
+dest_files=["res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.s3tc.ctex", "res://.godot/imported/untitled_material_1_baseColor.png-8a86248dbf4e125cad97220327733b83.etc2.ctex"]
 
 [params]
 

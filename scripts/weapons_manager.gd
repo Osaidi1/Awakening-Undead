@@ -60,12 +60,10 @@ func _ready() -> void:
 	sway_noise = FastNoiseLite.new()
 	load_weapon()
 	magazine_count = weapon.magazine_size
-	total_ammo_count = weapon.start_ammo - magazine_count
+	total_ammo_count = weapon.start_ammo
 
 func _input(event: InputEvent) -> void:
 	if !Variables.can_control: return
-	if event.is_action_pressed("reload"):
-		reload()
 	if event is InputEventMouseMotion:
 		mouse_movement = event.relative
 
@@ -80,6 +78,9 @@ func _physics_process(_delta: float) -> void:
 		else:
 			if Input.is_action_pressed("attack"):
 				shoot()
+	
+	if magazine_count <= 0 and total_ammo_count > 0 and !is_reloading:
+		reload()
 
 func load_weapon() -> void:
 	self.mesh = weapon.mesh_scene
@@ -88,6 +89,7 @@ func load_weapon() -> void:
 	idle_sway_adjustment = weapon.idle_amount
 	idle_sway_rotation_strength = weapon.idle_strength
 	random_sway_amount = weapon.idle_random_amount
+	total_ammo_count = weapon.start_ammo
 
 func get_sway_noise() -> float:
 	var noise := sway_noise
@@ -204,35 +206,27 @@ func damage_target(result: Dictionary) -> void:
 
 func remove_bullets() -> void:
 	magazine_count -= 1
-	if magazine_count <= 0 and total_ammo_count > 0 and !is_reloading:
-		reload()
 
 func reload() -> void:
-	if magazine_count == weapon.magazine_size or total_ammo_count == 0: return
 	is_reloading = true
 	reload_anim()
-	
-	if magazine_count == 0:
-		if total_ammo_count >= weapon.magazine_size:
-			await get_tree().create_timer(weapon.reload_time).timeout
-			magazine_count = weapon.magazine_size
-			total_ammo_count -= weapon.magazine_size
-		elif total_ammo_count < weapon.magazine_size:
-			await get_tree().create_timer(weapon.reload_time).timeout
-			magazine_count += total_ammo_count
-			total_ammo_count = 0
-	else:
-		var bullets_needed = weapon.magazine_size - magazine_count
-		if total_ammo_count >= bullets_needed:
-			await get_tree().create_timer(weapon.reload_time).timeout
-			magazine_count = weapon.magazine_size
-			total_ammo_count -= bullets_needed
-		elif total_ammo_count < bullets_needed:
-			await get_tree().create_timer(weapon.reload_time).timeout
-			magazine_count += total_ammo_count
-			total_ammo_count = 0
+	var bullets_needed = weapon.magazine_size - magazine_count
+	var bullets_to_load = min(bullets_needed, total_ammo_count)
+	await get_tree().create_timer(weapon.reload_time).timeout
+	magazine_count += bullets_to_load
+	total_ammo_count -= bullets_to_load
+	total_ammo_count = max(total_ammo_count, 0)
 	is_reloading = false
+	can_shoot = true
+	if total_ammo_count < 50:
+		Variables.spawn_boxes = true
 
 func reload_anim() -> void:
 	position.y = lerp(position.y, position.y - 3, 2)
-	await get_tree().create_timer(2).timeout
+	var timer := 0.0
+	var start_y := position.y
+	while timer < 0.5:
+		var delta := get_process_delta_time()
+		timer += delta
+		position.y = start_y - sin((timer / 0.5) * PI) * 0.3
+		await get_tree().process_frame

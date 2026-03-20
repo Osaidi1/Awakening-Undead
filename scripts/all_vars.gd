@@ -9,7 +9,8 @@ var zombies_alive: int
 var is_pauseable: bool
 var give_ammo: bool
 var can_spawn_double: bool
-var reload: bool
 var cutscene_played := false
 var can_control: bool
 var once_death: bool
+var zombies_now: bool
+var spawn_boxes: bool

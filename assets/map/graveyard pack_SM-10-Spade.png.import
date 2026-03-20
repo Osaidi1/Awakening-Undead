@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://gsduefvdqg3n"
 path.s3tc="res://.godot/imported/graveyard pack_SM-10-Spade.png-9b283f22f76f2ddb7c9c3fcccb9865cb.s3tc.ctex"
+path.etc2="res://.godot/imported/graveyard pack_SM-10-Spade.png-9b283f22f76f2ddb7c9c3fcccb9865cb.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/map/graveyard pack_SM-10-Spade.png"
-dest_files=["res://.godot/imported/graveyard pack_SM-10-Spade.png-9b283f22f76f2ddb7c9c3fcccb9865cb.s3tc.ctex"]
+dest_files=["res://.godot/imported/graveyard pack_SM-10-Spade.png-9b283f22f76f2ddb7c9c3fcccb9865cb.s3tc.ctex", "res://.godot/imported/graveyard pack_SM-10-Spade.png-9b283f22f76f2ddb7c9c3fcccb9865cb.etc2.ctex"]
 
 [params]
 

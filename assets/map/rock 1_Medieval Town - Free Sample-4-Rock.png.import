@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dsl7qrpp3m87f"
 path.s3tc="res://.godot/imported/rock 1_Medieval Town - Free Sample-4-Rock.png-745566c339fd15cea3e8831a74d77435.s3tc.ctex"
+path.etc2="res://.godot/imported/rock 1_Medieval Town - Free Sample-4-Rock.png-745566c339fd15cea3e8831a74d77435.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/map/rock 1_Medieval Town - Free Sample-4-Rock.png"
-dest_files=["res://.godot/imported/rock 1_Medieval Town - Free Sample-4-Rock.png-745566c339fd15cea3e8831a74d77435.s3tc.ctex"]
+dest_files=["res://.godot/imported/rock 1_Medieval Town - Free Sample-4-Rock.png-745566c339fd15cea3e8831a74d77435.s3tc.ctex", "res://.godot/imported/rock 1_Medieval Town - Free Sample-4-Rock.png-745566c339fd15cea3e8831a74d77435.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://gx00h0ffv5q3"
 path.s3tc="res://.godot/imported/untitled_M4-1_baseColor.png-88cbe3f4e712f54d6a257f7afed82c6d.s3tc.ctex"
+path.etc2="res://.godot/imported/untitled_M4-1_baseColor.png-88cbe3f4e712f54d6a257f7afed82c6d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://weapons/m4a1/things/untitled_M4-1_baseColor.png"
-dest_files=["res://.godot/imported/untitled_M4-1_baseColor.png-88cbe3f4e712f54d6a257f7afed82c6d.s3tc.ctex"]
+dest_files=["res://.godot/imported/untitled_M4-1_baseColor.png-88cbe3f4e712f54d6a257f7afed82c6d.s3tc.ctex", "res://.godot/imported/untitled_M4-1_baseColor.png-88cbe3f4e712f54d6a257f7afed82c6d.etc2.ctex"]
 
 [params]
 

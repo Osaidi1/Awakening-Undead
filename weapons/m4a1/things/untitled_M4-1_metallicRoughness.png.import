@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://s5k43gvv8t0q"
 path.s3tc="res://.godot/imported/untitled_M4-1_metallicRoughness.png-dd053e4cab197d2bf512ec20932aca7d.s3tc.ctex"
+path.etc2="res://.godot/imported/untitled_M4-1_metallicRoughness.png-dd053e4cab197d2bf512ec20932aca7d.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://weapons/m4a1/things/untitled_M4-1_metallicRoughness.png"
-dest_files=["res://.godot/imported/untitled_M4-1_metallicRoughness.png-dd053e4cab197d2bf512ec20932aca7d.s3tc.ctex"]
+dest_files=["res://.godot/imported/untitled_M4-1_metallicRoughness.png-dd053e4cab197d2bf512ec20932aca7d.s3tc.ctex", "res://.godot/imported/untitled_M4-1_metallicRoughness.png-dd053e4cab197d2bf512ec20932aca7d.etc2.ctex"]
 
 [params]
 

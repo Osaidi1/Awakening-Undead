@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0yvpl7u4akh2"
 path.s3tc="res://.godot/imported/coffin_Material_baseColor.png-1a6a841c8318494eaecced23224753e8.s3tc.ctex"
+path.etc2="res://.godot/imported/coffin_Material_baseColor.png-1a6a841c8318494eaecced23224753e8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/coffin_Material_baseColor.png"
-dest_files=["res://.godot/imported/coffin_Material_baseColor.png-1a6a841c8318494eaecced23224753e8.s3tc.ctex"]
+dest_files=["res://.godot/imported/coffin_Material_baseColor.png-1a6a841c8318494eaecced23224753e8.s3tc.ctex", "res://.godot/imported/coffin_Material_baseColor.png-1a6a841c8318494eaecced23224753e8.etc2.ctex"]
 
 [params]
 
